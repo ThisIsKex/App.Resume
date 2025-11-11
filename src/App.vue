@@ -62,15 +62,26 @@ strong {
 /* Print-spezifische Styles */
 @media print {
   .cv-section {
-    page-break-inside: avoid;
+    page-break-inside: auto;
     margin-left: 1.5cm;
     margin-right: 1.5cm;
+    margin-top: 0.5cm;
+    margin-bottom: 0.5cm;
   }
 
   .experience-item,
   .education-item,
+  .development-item,
   .project-item {
     page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  .experience-header,
+  h3,
+  h2 {
+    page-break-after: avoid;
+    break-after: avoid;
   }
 
   .cv-footer {

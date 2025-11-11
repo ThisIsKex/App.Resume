@@ -53,6 +53,8 @@ h2 {
 
 .experience-item {
   margin-bottom: 25px;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .experience-item:last-child {
@@ -92,7 +94,25 @@ li {
   .cv-section {
     box-shadow: none;
     margin: 20px auto;
+    page-break-inside: auto;
+    padding-top: 40px;
+  }
+  
+  .experience-item {
     page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 20px;
+    orphans: 3;
+    widows: 3;
+  }
+  
+  .experience-item + .experience-item {
+    border-top: 40px solid transparent;
+    margin-top: -40px;
+  }
+  
+  .experience-header {
+    page-break-after: avoid;
   }
 }
 </style>

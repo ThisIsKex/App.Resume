@@ -50,6 +50,8 @@ h2 {
 
 .education-item {
   margin-bottom: 15px;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .education-item:last-child {
@@ -65,7 +67,13 @@ h2 {
   .cv-section {
     box-shadow: none;
     margin: 20px auto;
+    page-break-inside: auto;
+  }
+  
+  .education-item {
     page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 12px;
   }
 }
 </style>

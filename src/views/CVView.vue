@@ -20,7 +20,7 @@ onMounted(async () => {
 <template>
   <div class="cv-app" v-if="cvStore.cvData">
     <Header :personalInfo="cvStore.cvData.personalInfo" />
-    <Profile :profile="cvStore.cvData.profile" />
+    <Profile v-if="cvStore.cvData.profile" :profile="cvStore.cvData.profile" />
     <Experience :experiences="cvStore.experience" />
     <Education :education="cvStore.education" />
     <Skills :skills="cvStore.skills" />
@@ -30,7 +30,7 @@ onMounted(async () => {
     <Interests :interests="cvStore.cvData.interests" />
 
     <footer class="cv-footer">
-      © 2025 {{ cvStore.cvData.personalInfo?.name }} – Erstellt mit Vue 3 & TypeScript
+      © 2025 {{ cvStore.cvData.personalInfo.name }} – Erstellt mit Vue 3 & TypeScript
     </footer>
   </div>
 </template>

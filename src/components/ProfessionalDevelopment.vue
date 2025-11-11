@@ -51,6 +51,8 @@ h2 {
 
 .development-item {
   margin-bottom: 15px;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 .development-item:last-child {
@@ -66,7 +68,13 @@ h2 {
   .cv-section {
     box-shadow: none;
     margin: 20px auto;
+    page-break-inside: auto;
+  }
+  
+  .development-item {
     page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 12px;
   }
 }
 </style>
