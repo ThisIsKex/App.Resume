@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 import Header from "../components/Header.vue";
 import Profile from "../components/Profile.vue";
 import Experience from "../components/Experience.vue";
@@ -10,6 +11,7 @@ import ProfessionalDevelopment from "../components/ProfessionalDevelopment.vue";
 import Interests from "../components/Interests.vue";
 import { useCVStore } from "../stores/cvStore";
 
+const router = useRouter();
 const cvStore = useCVStore();
 const isPrinting = ref(false);
 
@@ -29,9 +31,13 @@ const handlePrint = () => {
 <template>
   <div class="cv-app" v-if="cvStore.cvData">
     <div class="print-controls">
+      <button @click="router.push('/edit');" class="edit-button">
+        <font-awesome-icon icon="pen" /> Bearbeiten
+      </button>
       <button @click="handlePrint" class="print-button">
         <font-awesome-icon icon="print" /> PDF/Drucken
       </button>
+
     </div>
     <Header :personalInfo="cvStore.cvData.personalInfo" />
     <Profile v-if="cvStore.cvData.profile" :profile="cvStore.cvData.profile" />
@@ -82,6 +88,32 @@ const handlePrint = () => {
 .print-button:active {
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(14, 80, 145, 0.2);
+}
+
+.edit-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  margin-right: 12px;
+}
+
+.edit-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.edit-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.2);
 }
 
 .loading {
