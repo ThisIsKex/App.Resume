@@ -119,7 +119,6 @@ li {
     page-break-inside: avoid;
     break-inside: avoid;
     margin-bottom: 15px;
-    padding: 0 1.5cm;
   }
 
   .experience-item + .experience-item {
