@@ -99,23 +99,30 @@ li {
 }
 
 @media print {
+  @page {
+    margin-top: 2cm;
+    size: A4;
+  }
+
+  @page :first {
+    margin: 0;
+  }
+
   .cv-section {
     box-shadow: none;
-    margin: 5px auto;
+    margin: 0;
     page-break-inside: auto;
-    padding: 15px 1.5cm;
+    padding: 1.5cm;
   }
 
   .experience-item {
     page-break-inside: avoid;
     break-inside: avoid;
     margin-bottom: 15px;
-    orphans: 3;
-    widows: 3;
-    gap: 5px 15px;
+    padding: 0 1.5cm;
   }
 
-  .experience-item+.experience-item {
+  .experience-item + .experience-item {
     border-top: 20px solid transparent;
     margin-top: -20px;
   }

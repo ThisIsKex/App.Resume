@@ -124,6 +124,15 @@ defineProps<{
 }
 
 @media print {
+  @page {
+    margin: 0;
+    size: A4;
+  }
+
+  @page :first {
+    margin: 0;
+  }
+
   .cv-header {
     background-color: #0e5091 !important;
     color: white !important;
@@ -131,9 +140,11 @@ defineProps<{
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     margin: 0 !important;
-    width: 100% !important;
+    width: 100%;
     box-sizing: border-box;
     text-align: left;
+    break-after: avoid;
+    page-break-after: avoid;
   }
 
   .header-content {

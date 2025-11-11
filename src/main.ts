@@ -3,6 +3,9 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 
+// Paged.js für Print
+import "pagedjs";
+
 // Font Awesome
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -15,6 +18,7 @@ import {
   faCode,
   faLightbulb,
   faHeart,
+  faPrint,
   faArrowLeft,
   faSave,
   faUpload,
@@ -39,6 +43,7 @@ library.add(
   faCode,
   faLightbulb,
   faHeart,
+  faPrint,
   faArrowLeft,
   faSave,
   faUpload,
