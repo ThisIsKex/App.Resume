@@ -28,6 +28,13 @@ export interface Project {
   icon?: string;
 }
 
+export interface ProfessionalDevelopment {
+  title: string;
+  institution: string;
+  period: string;
+  description?: string;
+}
+
 export interface CVData {
   personalInfo: PersonalInfo;
   profile: string;
@@ -35,5 +42,6 @@ export interface CVData {
   education: Education[];
   skills: string[];
   projects: Project[];
+  professionalDevelopment: ProfessionalDevelopment[];
   interests: string;
 }

@@ -34,12 +34,12 @@ defineProps<{
         <p class="social-links" v-if="personalInfo.github || personalInfo.linkedin">
           <a v-if="personalInfo.github" :href="personalInfo.github" target="_blank">
             <font-awesome-icon :icon="['fab', 'github']" />
-            {{ personalInfo.github.replace("https://", "").replace("github.com/", "") }}
+            Github
           </a>
           <span v-if="personalInfo.github && personalInfo.linkedin">|</span>
           <a v-if="personalInfo.linkedin" :href="personalInfo.linkedin" target="_blank">
             <font-awesome-icon :icon="['fab', 'linkedin']" />
-            {{ personalInfo.linkedin.replace("https://", "").replace("linkedin.com/in/", "") }}
+            LinkedIn
           </a>
         </p>
       </div>
@@ -96,7 +96,7 @@ defineProps<{
 }
 
 .social-links {
-  margin: 10px 0 0 0;
+  margin: 10px 0 0 5px;
   font-size: 14px;
 }
 

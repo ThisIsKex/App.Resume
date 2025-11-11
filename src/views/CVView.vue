@@ -6,6 +6,7 @@ import Experience from "../components/Experience.vue";
 import Education from "../components/Education.vue";
 import Skills from "../components/Skills.vue";
 import Projects from "../components/Projects.vue";
+import ProfessionalDevelopment from "../components/ProfessionalDevelopment.vue";
 import Interests from "../components/Interests.vue";
 import { useCVStore } from "../stores/cvStore";
 
@@ -23,7 +24,9 @@ onMounted(async () => {
     <Experience :experiences="cvStore.experience" />
     <Education :education="cvStore.education" />
     <Skills :skills="cvStore.skills" />
-    <Projects :projects="cvStore.projects" />
+    <Projects v-if="cvStore.projects.length > 0" :projects="cvStore.projects" />
+    <ProfessionalDevelopment v-if="cvStore.cvData.professionalDevelopment.length > 0"
+      :professionalDevelopment="cvStore.cvData.professionalDevelopment" />
     <Interests :interests="cvStore.cvData.interests" />
 
     <footer class="cv-footer">
