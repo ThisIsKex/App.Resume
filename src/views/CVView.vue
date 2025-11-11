@@ -29,9 +29,9 @@ onMounted(async () => {
       :professionalDevelopment="cvStore.cvData.professionalDevelopment" />
     <Interests :interests="cvStore.cvData.interests" />
 
-    <!-- <footer class="cv-footer">
+    <footer class="cv-footer">
       © 2025 {{ cvStore.cvData.personalInfo.name }} – Erstellt mit Vue 3 & TypeScript
-    </footer> -->
+    </footer>
   </div>
 </template>
 
@@ -56,5 +56,11 @@ onMounted(async () => {
   padding: 20px;
   font-size: 13px;
   margin-top: 40px;
+}
+
+@media print {
+  .cv-footer {
+    display: none;
+  }
 }
 </style>
