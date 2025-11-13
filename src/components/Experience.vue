@@ -50,7 +50,7 @@ h2 {
 }
 
 .experience-item {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   page-break-inside: avoid;
   break-inside: avoid;
   display: grid;
@@ -58,7 +58,6 @@ h2 {
   grid-template-areas:
     "title period"
     "tasks .";
-  gap: 10px 20px;
 }
 
 .experience-item:last-child {
@@ -87,24 +86,25 @@ h2 {
   grid-area: tasks;
   margin: 0;
   padding-left: 20px;
+  padding-right: 30px;
 }
 
 ul {
   margin: 0;
-  padding-left: 20px;
 }
 
 li {
-  margin-bottom: 6px;
+  margin-bottom: 0px;
+  font-size: 13px;
 }
 
 @media print {
   .cv-section {
     box-shadow: none;
     page-break-inside: auto;
-    max-width: 100%;
-    margin: 15px auto;
-    padding: 20px 40px;
+    margin-top: 1cm;
+    margin-left: 1cm;
+    margin-right: 1cm;
   }
 
   h2 {

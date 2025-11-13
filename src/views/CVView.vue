@@ -140,7 +140,14 @@ const handlePrint = () => {
 
 @media print {
   @page {
-    margin: 1.0cm 1.5cm 1.0cm 1.5cm;
+    margin-top: 1.0cm;
+    margin-bottom: 1.0cm;
+    size: A4;
+  }
+
+  @page :first {
+    margin: 0;
+    margin-bottom: 1.0cm;
     size: A4;
   }
 

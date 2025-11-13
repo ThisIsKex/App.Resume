@@ -43,9 +43,9 @@ h2 {
   .cv-section {
     box-shadow: none;
     page-break-inside: avoid;
-    max-width: 100%;
-    margin: 15px auto;
-    padding: 20px 40px;
+    margin-top: 0px;
+    margin-left: 1cm;
+    margin-right: 1cm;
   }
 
   h2 {

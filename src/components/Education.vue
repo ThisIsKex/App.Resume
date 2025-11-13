@@ -78,9 +78,7 @@ h2 {
   .cv-section {
     box-shadow: none;
     page-break-inside: auto;
-    max-width: 100%;
-    margin: 15px auto;
-    padding: 20px 40px;
+    margin: 0 1cm 0 1cm;
   }
 
   h2 {

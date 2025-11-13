@@ -31,7 +31,7 @@ defineProps<{
         <p class="social-links" v-if="personalInfo.github || personalInfo.linkedin">
           <a v-if="personalInfo.github" :href="personalInfo.github" target="_blank">
             <font-awesome-icon :icon="['fab', 'github']" />
-            Github
+            {{ personalInfo.github.split('/').pop() }}
           </a>
           <span v-if="personalInfo.github && personalInfo.linkedin">|</span>
           <a v-if="personalInfo.linkedin" :href="personalInfo.linkedin" target="_blank">
@@ -156,7 +156,6 @@ defineProps<{
     text-align: center;
     break-after: avoid;
     page-break-after: avoid;
-    border-radius: 12px;
     display: flex;
     justify-content: center;
   }
