@@ -6,7 +6,8 @@
     "email": "max.mustermann@email.de",
     "github": "https://github.com/maxmustermann",
     "linkedin": "https://linkedin.com/in/maxmustermann",
-    "profileImage": "https://picsum.photos/200/300"
+    "profileImage": "https://picsum.photos/200/300",
+    "website": "https://maxmustermann.dev"
   },
   "profile": "Engagierter Softwareentwickler mit 5+ Jahren Erfahrung in Web-, Cloud- und Backend-Entwicklung. Fokus auf sauberen Code, agile Prozesse und moderne Technologien wie Python, JavaScript, TypeScript, React, Node.js und Docker.",
   "experience": [

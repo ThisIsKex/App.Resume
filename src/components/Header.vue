@@ -38,6 +38,11 @@ defineProps<{
             <font-awesome-icon :icon="['fab', 'linkedin']" />
             LinkedIn
           </a>
+          <span v-if="personalInfo.linkedin && personalInfo.website">|</span>
+          <a v-if="personalInfo.website" :href="personalInfo.website" target="_blank">
+            <font-awesome-icon :icon="['fas', 'globe']" />
+            Website
+          </a>
         </p>
       </div>
     </div>

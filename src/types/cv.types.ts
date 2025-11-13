@@ -6,6 +6,7 @@ export interface PersonalInfo {
   github?: string;
   linkedin?: string;
   profileImage?: string;
+  website?: string;
 }
 
 export interface Experience {
