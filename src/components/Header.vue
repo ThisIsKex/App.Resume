@@ -153,10 +153,12 @@ defineProps<{
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    text-align: left;
+    text-align: center;
     break-after: avoid;
     page-break-after: avoid;
     border-radius: 12px;
+    display: flex;
+    justify-content: center;
   }
 
   .header-content {
@@ -164,7 +166,7 @@ defineProps<{
     grid-template-columns: 130px 1fr;
     gap: 20px;
     align-items: start;
-    width: 100%;
+    width: auto;
   }
 
   .profile-image {
