@@ -1,50 +1,50 @@
-# Projekt-Zusammenfassung: Lebenslauf Vue App
+# Project Summary: Resume Vue App
 
-## Projektübersicht
+## Project Overview
 
-**Name**: CV Vue App  
-**Typ**: Single Page Application (SPA)  
-**Zweck**: Professionelle Lebenslauf-Anwendung mit PDF-Export-Funktionalität  
-**Status**: Aktiv in Entwicklung  
+**Name**: Resume Vue App  
+**Type**: Single Page Application (SPA)  
+**Purpose**: Professional resume application with PDF export functionality  
+**Status**: Actively in development  
 **Framework**: Vue 3 + TypeScript + Vite
 
-## Technische Architektur
+## Technical Architecture
 
 ### Frontend Stack
-- **Vue 3** (Composition API mit `<script setup>`)
-- **TypeScript** (Strict Mode)
-- **Vite** (Build Tool & Dev Server)
+- **Vue 3** (Composition API with `<script setup>`)
+- **TypeScript** (Strict mode)
+- **Vite** (Build tool & dev server)
 - **Font Awesome** (Icons: Solid + Brands)
 
-### Projektstruktur
+### Project Structure
 ```
-cv/
-├── public/                 # Statische Assets
-│   ├── cv-data.json       # Exportierte CV-Daten (optional)
-│   └── profile.jpg        # Profilbild
+resume/
+├── public/                 # Static assets
+│   ├── resume-data.json       # Exported resume data (optional)
+│   └── profile.jpg        # Profile image
 ├── src/
 │   ├── components/         # Vue Single File Components
-│   │   ├── Header.vue      # Header mit Profilbild & Kontaktdaten
-│   │   ├── Profile.vue     # Persönliches Profil/Zusammenfassung
-│   │   ├── Experience.vue  # Berufserfahrung
-│   │   ├── Education.vue   # Ausbildung
-│   │   ├── Skills.vue      # Kenntnisse/Skills (Chips)
-│   │   ├── Projects.vue    # Projekt-Portfolio
-│   │   └── Interests.vue   # Interessen
+│   │   ├── Header.vue      # Header with profile image & contact info
+│   │   ├── Profile.vue     # Personal profile/summary
+│   │   ├── Experience.vue  # Work experience
+│   │   ├── Education.vue   # Education
+│   │   ├── Skills.vue      # Skills (chips)
+│   │   ├── Projects.vue    # Project portfolio
+│   │   └── Interests.vue   # Interests
 │   ├── views/
-│   │   ├── CVView.vue      # CV Ansicht (/)
+│   │   ├── ResumeView.vue      # Resume view (/)
 │   │   └── EditorView.vue  # Editor (/edit)
 │   ├── composables/
-│   │   └── useCVData.ts    # CV-Daten State & JSON Loading
+│   │   └── useResumeData.ts    # Resume data state & JSON loading
 │   ├── router/
-│   │   └── index.ts        # Vue Router Konfiguration
+│   │   └── index.ts        # Vue Router config
 │   ├── data/
-│   │   └── cv-data.ts      # Standard CV-Daten (Fallback)
+│   │   └── resume-data.ts      # Default resume data (fallback)
 │   ├── types/
-│   │   └── cv.types.ts     # TypeScript Interfaces
-│   ├── App.vue             # Root Component mit RouterView
-│   ├── main.ts             # Entry Point + Router + Font Awesome
-│   └── vite-env.d.ts       # Vue & Vite Type Definitions
+│   │   └── resume.types.ts     # TypeScript interfaces
+│   ├── App.vue             # Root component with RouterView
+│   ├── main.ts             # Entry point + Router + Font Awesome
+│   └── vite-env.d.ts       # Vue & Vite type definitions
 ├── index.html
 ├── package.json
 ├── tsconfig.json
@@ -53,189 +53,189 @@ cv/
 └── README.md
 ```
 
-## Datenmodell
+## Data Model
 
-### TypeScript Interfaces (src/types/cv.types.ts)
+### TypeScript Interfaces (src/types/resume.types.ts)
 
 ```typescript
-PersonalInfo    // Name, Kontakt, Social Media, Profilbild
-Experience      // Berufserfahrung (Title, Company, Period, Responsibilities)
-Education       // Ausbildung (Degree, Institution, Period)
-Project         // Projekte (Name, Description, Icon)
-CVData          // Haupt-Interface (kombiniert alle Daten)
+PersonalInfo    // Name, contact, social media, profile image
+Experience      // Work experience (title, company, period, responsibilities)
+Education       // Education (degree, institution, period)
+Project         // Projects (name, description, icon)
+ResumeData      // Main interface (combines all data)
 ```
 
-### Datenquelle
-- **Standard-Daten**: `src/data/cv-data.ts` (Fallback)
-- **JSON-Daten**: `public/cv-data.json` (wird automatisch geladen, falls vorhanden)
-- **Composable**: `src/composables/useCVData.ts` - Lädt JSON oder Fallback
-- **Bearbeitung**: Via Editor unter `/edit` oder manuell in JSON/TS
+### Data Sources
+- **Default data**: `src/data/resume-data.ts` (fallback)
+- **JSON data**: `public/resume-data.json` (auto-loaded if present)
+- **Composable**: `src/composables/useResumeData.ts` – loads JSON or fallback
+- **Editing**: Via editor at `/edit` or manually in JSON/TS
 
 ## Routing & Navigation
 
 ### Routes
-- **`/`** - CV Ansicht (CVView.vue)
-- **`/edit`** - Editor Interface (EditorView.vue)
+- **`/`** – Resume view (ResumeView.vue)
+- **`/edit`** – Editor interface (EditorView.vue)
 
 ### Router Setup
 - Vue Router 4
-- HTML5 History Mode
-- Konfiguration in `src/router/index.ts`
+- HTML5 history mode
+- Config in `src/router/index.ts`
 
-## Design-System
+## Design System
 
-### Farbschema
-- **Primary**: `#0e5091` (Dunkelblau - Header & Überschriften)
-- **Background**: `#fafafa` (Hellgrau)
-- **White**: `#ffffff` (Sections)
-- **Text**: `#333` (Dunkelgrau)
-- **Chips**: `#e0e0e0` (Hellgrau für Skills)
+### Color Scheme
+- **Primary**: `#0e5091` (dark blue – header & headings)
+- **Background**: `#fafafa` (light gray)
+- **White**: `#ffffff` (sections)
+- **Text**: `#333` (dark gray)
+- **Chips**: `#e0e0e0` (light gray for skills)
 
-### Typografie
-- **Font Stack**: System Fonts (-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, etc.)
+### Typography
+- **Font stack**: System fonts (-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, etc.)
 - **Header**: 2.5rem, center-aligned
-- **Section Titles**: 20px, mit Bottom Border
+- **Section titles**: 20px, with bottom border
 - **Body**: 16px, line-height 1.6
 
 ### Layout
-- **Desktop**: Max-width 900px, zentriert
+- **Desktop**: Max-width 900px, centered
 - **Mobile**: Responsive, full-width
-- **Print**: A4, margin 0 (Header full-width), Sections mit 1.5cm margins
+- **Print**: A4, margin 0 (header full-width), sections with 1.5cm margins
 
-## Komponenten-Architektur
+## Component Architecture
 
 ### Component Pattern
-- **Props-based**: Alle Components erhalten Daten via Props
-- **Scoped Styles**: CSS ist pro Component isoliert
-- **Type-safe Props**: TypeScript Interfaces für alle Props
+- **Props-based**: All components receive data via props
+- **Scoped styles**: CSS is isolated per component
+- **Type-safe props**: TypeScript interfaces for all props
 
-### Component-Übersicht
+### Component Overview
 
-| Component | Props | Beschreibung |
-|-----------|-------|--------------|
-| Header | `personalInfo: PersonalInfo` | Blauer Header mit Profilbild, Name, Kontakt, Social Links |
-| Profile | `profile: string` | Persönliche Zusammenfassung |
-| Experience | `experiences: Experience[]` | Liste der Berufserfahrungen |
-| Education | `education: Education[]` | Ausbildungsstationen |
-| Skills | `skills: string[]` | Skill-Chips |
-| Projects | `projects: Project[]` | Projekt-Portfolio |
-| Interests | `interests: string` | Interessen als Text |
+| Component | Props | Description |
+|-----------|-------|-------------|
+| Header | `personalInfo: PersonalInfo` | Blue header with profile image, name, contact, social links |
+| Profile | `profile: string` | Personal summary |
+| Experience | `experiences: Experience[]` | List of work experiences |
+| Education | `education: Education[]` | Education entries |
+| Skills | `skills: string[]` | Skill chips |
+| Projects | `projects: Project[]` | Project portfolio |
+| Interests | `interests: string` | Interests as text |
 
 ### Views
-- **CVView.vue** - Haupt-CV Ansicht, nutzt `useCVData` Composable
-- **EditorView.vue** - Editor Interface mit Formularen für alle Sections
+- **ResumeView.vue** – Main resume view, uses `useResumeData` composable
+- **EditorView.vue** – Editor interface with forms for all sections
 
-## CV Data Editor
+## Resume Data Editor
 
 ### Features
-- **Live Editing** - Alle CV-Sections bearbeitbar
-- **JSON Export/Import** - Download & Upload von cv-data.json
-- **LocalStorage** - Browser-basiertes Speichern & Laden
-- **Dynamic Lists** - Items hinzufügen/entfernen
-- **Responsive UI** - Funktioniert auf Desktop & Mobile
+- **Live editing** – All resume sections editable
+- **JSON export/import** – Download & upload of resume-data.json
+- **LocalStorage** – Browser-based saving & loading
+- **Dynamic lists** – Add/remove items
+- **Responsive UI** – Works on desktop & mobile
 
 ### Editor Sections
-1. Persönliche Informationen (Name, Kontakt, Links, Profilbild)
-2. Profil (Zusammenfassung)
-3. Berufserfahrung (Dynamische Liste mit Verantwortlichkeiten)
-4. Ausbildung (Dynamische Liste)
-5. Kenntnisse (Dynamische Skill-Liste)
-6. Projekte (Dynamische Liste mit Icon & Beschreibung)
-7. Interessen (Text)
+1. Personal information (name, contact, links, profile image)
+2. Profile (summary)
+3. Work experience (dynamic list with responsibilities)
+4. Education (dynamic list)
+5. Skills (dynamic skill list)
+6. Projects (dynamic list with icon & description)
+7. Interests (text)
 
 ### Workflow
-1. Besuche `/edit`
-2. Bearbeite alle Felder
-3. Klicke "JSON Export" → `cv-data.json` wird heruntergeladen
-4. Lege `cv-data.json` im `public/` Ordner ab
-5. Lade Seite neu → Daten werden automatisch geladen
+1. Visit `/edit`
+2. Edit all fields
+3. Click "JSON Export" → `resume-data.json` is downloaded
+4. Place `resume-data.json` in the `public/` folder
+5. Reload page → data is loaded automatically
 
-### Print/PDF-Optimierung
+### Print/PDF Optimization
 
-### Techniken
-1. **@media print** Rules in allen Components
-2. **print-color-adjust: exact** für Farben (Header, Skill-Chips)
-3. **@page { margin: 0; size: A4; }** für A4-Format
-4. **page-break-inside: avoid** für Sections
-5. **Margin-Management**: Header full-width, Content mit 1.5cm margins
+#### Techniques
+1. **@media print** rules in all components
+2. **print-color-adjust: exact** for colors (header, skill chips)
+3. **@page { margin: 0; size: A4; }** for A4 format
+4. **page-break-inside: avoid** for sections
+5. **Margin management**: Header full-width, content with 1.5cm margins
 
-### Print-Workflow
-1. `Strg+P` / `Cmd+P` im Browser
-2. "Hintergrundgrafiken" aktivieren
-3. Als PDF speichern
-4. Ergebnis: Professioneller, druckfertiger Lebenslauf
+#### Print Workflow
+1. `Ctrl+P` / `Cmd+P` in browser
+2. Enable "background graphics"
+3. Save as PDF
+4. Result: Professional, print-ready resume
 
-## Entwicklungsworkflow
+## Development Workflow
 
 ### Commands
 ```bash
-npm install        # Dependencies installieren
-npm run dev        # Dev Server starten (Port 5173)
-npm run build      # Production Build
-npm run preview    # Preview des Builds
-npm run format     # Code mit Prettier formatieren
+npm install        # Install dependencies
+npm run dev        # Start dev server (port 5173)
+npm run build      # Production build
+npm run preview    # Preview build
+npm run format     # Format code with Prettier
 ```
 
 ### Hot Module Replacement (HMR)
-- Vite bietet instant HMR
-- Änderungen an Components, Styles, Data werden sofort sichtbar
-- Kein Neuladen notwendig
+- Vite provides instant HMR
+- Changes to components, styles, data are immediately visible
+- No reload needed
 
 ### Type Checking
-- TypeScript Strict Mode aktiv
-- Vue Language Features (Volar) für IDE-Support
-- Type-safe Props & Data
+- TypeScript strict mode enabled
+- Vue language features (Volar) for IDE support
+- Type-safe props & data
 
 ### Code Formatting
-- Prettier für konsistente Formatierung
-- Double Quotes
-- 2 Spaces Indentation
-- 100 Zeichen Zeilenbreite
+- Prettier for consistent formatting
+- Double quotes
+- 2 spaces indentation
+- 100 character line width
 
-## Implementierte Features
+## Implemented Features
 
-✅ **CV Editor** - Vollständiger Editor unter `/edit` mit allen Sections  
-✅ **JSON Export/Import** - Download & Upload von CV-Daten  
-✅ **LocalStorage** - Browser-basiertes Speichern & Laden  
-✅ **Automatisches JSON Loading** - `public/cv-data.json` wird automatisch geladen  
-✅ **Dynamische Listen** - Items für Experience, Education, Skills, Projects hinzufügen/entfernen  
-✅ **Responsive Design** - Funktioniert auf Desktop & Mobile  
-✅ **Print-Optimierung** - Perfektes PDF-Layout mit Farberhaltung  
-✅ **Font Awesome Icons** - Professionelle Icon-Integration  
-✅ **Vue Router** - Navigation zwischen CV und Editor  
-✅ **TypeScript** - Vollständig typsicher  
-✅ **Prettier** - Konsistente Code-Formatierung
+✅ **Resume Editor** – Full editor at `/edit` with all sections  
+✅ **JSON export/import** – Download & upload of resume data  
+✅ **LocalStorage** – Browser-based saving & loading  
+✅ **Automatic JSON loading** – `public/resume-data.json` is auto-loaded  
+✅ **Dynamic lists** – Add/remove items for experience, education, skills, projects  
+✅ **Responsive design** – Works on desktop & mobile  
+✅ **Print optimization** – Perfect PDF layout with color retention  
+✅ **Font Awesome icons** – Professional icon integration  
+✅ **Vue Router** – Navigation between resume and editor  
+✅ **TypeScript** – Fully type-safe  
+✅ **Prettier** – Consistent code formatting
 
-## Anpassungspunkte
-1. **Farben**: Suche nach `#0e5091` in allen .vue Dateien
-2. **Icons**: `src/main.ts` - Font Awesome Icon Library
-3. **Layout**: `src/App.vue` - Global Styles & @page Rules
-4. **Daten**: `src/data/cv-data.ts` - Alle persönlichen Informationen
-5. **Types**: `src/types/cv.types.ts` - Datenmodell erweitern
+## Customization Points
+1. **Colors**: Search for `#0e5091` in all .vue files
+2. **Icons**: `src/main.ts` – Font Awesome icon library
+3. **Layout**: `src/App.vue` – Global styles & @page rules
+4. **Data**: `src/data/resume-data.ts` – All personal information
+5. **Types**: `src/types/resume.types.ts` – Extend data model
 
-## Wichtige Dateien für Agents
+## Key Files for Agents
 
-### Zu bearbeiten durch Benutzer
-- **Via Editor**: `http://localhost:5173/edit` - Empfohlene Methode
-- `public/cv-data.json` - Exportierte Daten (wird automatisch geladen)
-- `src/data/cv-data.ts` - Fallback-Daten (Standard-Template)
-- `public/profile.jpg` - Profilbild
+### To be edited by user
+- **Via editor**: `http://localhost:5173/edit` – recommended method
+- `public/resume-data.json` – exported data (auto-loaded)
+- `src/data/resume-data.ts` – fallback data (default template)
+- `public/profile.jpg` – profile image
 
-### Zu bearbeiten für Styling
-- `src/components/*.vue` - Component-spezifische Styles (Scoped)
-- `src/App.vue` - Global Styles & Print Rules
+### For styling
+- `src/components/*.vue` – component-specific styles (scoped)
+- `src/App.vue` – global styles & print rules
 
-### Zu bearbeiten für Funktionalität
-- `src/types/cv.types.ts` - Datenmodell erweitern
-- `src/main.ts` - Font Awesome Icons hinzufügen
-- `src/components/*.vue` - Component-Logik
-- `src/views/EditorView.vue` - Editor-Funktionen
-- `src/composables/useCVData.ts` - Daten-Loading-Logik
+### For functionality
+- `src/types/resume.types.ts` – extend data model
+- `src/main.ts` – add Font Awesome icons
+- `src/components/*.vue` – component logic
+- `src/views/EditorView.vue` – editor functions
+- `src/composables/useResumeData.ts` – data loading logic
 
-### Zu bearbeiten für Build/Config
-- `package.json` - Dependencies
-- `vite.config.ts` - Vite Konfiguration
-- `tsconfig.json` - TypeScript Einstellungen
+### For build/config
+- `package.json` – dependencies
+- `vite.config.ts` – Vite config
+- `tsconfig.json` – TypeScript settings
 
 ## Dependencies
 
@@ -256,48 +256,48 @@ npm run format     # Code mit Prettier formatieren
 
 ## Best Practices
 
-### Code-Stil
-- Composition API mit `<script setup lang="ts">`
-- Props mit TypeScript Interfaces
-- Scoped Styles pro Component
-- Keine Global State Management (nicht nötig bei diesem Umfang)
+### Code Style
+- Composition API with `<script setup lang="ts">`
+- Props with TypeScript interfaces
+- Scoped styles per component
+- No global state management (not needed for this scope)
 
 ### Naming Conventions
 - Components: PascalCase (Header.vue, Experience.vue)
 - Props: camelCase (personalInfo, experiences)
-- Types: PascalCase (PersonalInfo, CVData)
-- Files: kebab-case oder PascalCase
+- Types: PascalCase (PersonalInfo, ResumeData)
+- Files: kebab-case or PascalCase
 
-### Print-Optimierung
-- Immer `print-color-adjust: exact` für Hintergrundfarben
-- `page-break-inside: avoid` für zusammenhängende Inhalte
-- Separate Print-Styles in `@media print` Blöcken
-- A4-Format explizit setzen mit `@page`
+### Print Optimization
+- Always use `print-color-adjust: exact` for background colors
+- `page-break-inside: avoid` for grouped content
+- Separate print styles in `@media print` blocks
+- Explicitly set A4 format with `@page`
 
 ## Troubleshooting
 
-### Problem: Farben werden nicht gedruckt
-**Lösung**: `print-color-adjust: exact` und `-webkit-print-color-adjust: exact` hinzufügen
+### Problem: Colors not printed
+**Solution**: Add `print-color-adjust: exact` and `-webkit-print-color-adjust: exact`
 
-### Problem: Header hat Margins beim Drucken
-**Lösung**: `@page { margin: 0 }` + Header mit `margin: 0 !important`
+### Problem: Header has margins when printing
+**Solution**: `@page { margin: 0 }` + header with `margin: 0 !important`
 
-### Problem: TypeScript Errors nach npm install
-**Lösung**: VS Code neu laden oder `vue.action.restartServer` Command ausführen
+### Problem: TypeScript errors after npm install
+**Solution**: Reload VS Code or run `vue.action.restartServer` command
 
-### Problem: HMR funktioniert nicht
-**Lösung**: Dev Server neu starten (`npm run dev`)
+### Problem: HMR not working
+**Solution**: Restart dev server (`npm run dev`)
 
-## Kontakt & Support
+## Contact & Support
 
-Bei Fragen oder Problemen:
-1. README.md konsultieren
-2. TypeScript Errors in der IDE beachten
-3. Browser Console für Runtime Errors checken
-4. Vite Dev Server Logs prüfen
+For questions or issues:
+1. Consult README.md
+2. Check TypeScript errors in the IDE
+3. Check browser console for runtime errors
+4. Check Vite dev server logs
 
 ---
 
-**Zuletzt aktualisiert**: 2025-11-11  
+**Last updated**: 2025-11-11  
 **Version**: 1.0.0  
-**Lizenz**: Frei verwendbar
+**License**: Free to use

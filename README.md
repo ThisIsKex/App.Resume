@@ -1,26 +1,26 @@
-# Lebenslauf Vue App
+# Resume Vue App
 
-Eine moderne, professionelle Lebenslauf-Anwendung, erstellt mit **Vue 3**, **TypeScript**, **Vite** und **Font Awesome**. 
-Optimiert für PDF-Export mit perfektem Print-Layout.
+A modern, professional resume application built with **Vue 3**, **TypeScript**, **Vite**, and **Font Awesome**. 
+Optimized for PDF export with perfect print layout.
 
 ## ✨ Features
 
-- ✏️ **CV Data Editor** - Benutzerfreundliche Oberfläche unter `/edit` zur Bearbeitung aller CV-Daten
-- 💾 **JSON Export/Import** - Speichern und Laden von CV-Daten als JSON-Dateien
-- 🔄 **LocalStorage** - Automatisches Speichern im Browser
-- 📦 **Automatisches Laden** - CV-Daten werden automatisch aus `public/cv-data.json` geladen
-- 🎨 Modernes, responsives Design
-- 📝 Typsichere Datenverwaltung mit TypeScript
-- 🖼️ Profilbild-Integration (kreisförmig)
-- 🎯 Font Awesome Icons
-- 📄 Print-optimiert für PDF-Export
+- ✏️ **Resume Data Editor** – User-friendly interface at `/edit` for editing all resume data
+- 💾 **JSON Export/Import** – Save and load resume data as JSON files
+- 🔄 **LocalStorage** – Automatic saving in the browser
+- 📦 **Automatic Loading** – Resume data is automatically loaded from `public/resume-data.json`
+- 🎨 Modern, responsive design
+- 📝 Type-safe data management with TypeScript
+- 🖼️ Profile image integration (circular)
+- 🎯 Font Awesome icons
+- 📄 Print-optimized for PDF export
 - 🔄 Hot Module Replacement (HMR)
-- 🎨 Benutzerdefinierte Farbgebung (#0e5091)
+- 🎨 Custom color scheme (#0e5091)
 
-## 📋 Voraussetzungen
+## 📋 Requirements
 
-- Node.js (v16 oder höher)
-- npm oder yarn
+- Node.js (v16 or higher)
+- npm or yarn
 
 ## 🚀 Installation
 
@@ -28,53 +28,53 @@ Optimiert für PDF-Export mit perfektem Print-Layout.
 npm install
 ```
 
-## ⚙️ Erste Einrichtung
+## ⚙️ First Setup
 
-**Wichtiger Schritt:** Bevor Sie die App das erste Mal starten, müssen Sie die Beispiel-CV-Daten kopieren:
+**Important step:** Before starting the app for the first time, copy the example resume data:
 
 ```bash
-# Kopieren Sie die Beispiel-Datei zur echten CV-Datei
-cp public/cv-data-example.json public/cv-data.json
+# Copy the example file to the actual resume file
+cp public/resume-data-example.json public/resume-data.json
 ```
 
 **Windows (PowerShell/CMD):**
 ```cmd
-copy public\cv-data-example.json public\cv-data.json
+copy public\resume-data-example.json public\resume-data.json
 ```
 
-Die Datei `cv-data-example.json` enthält Beispieldaten, die Sie als Ausgangspunkt verwenden können.
+The file `resume-data-example.json` contains sample data you can use as a starting point.
 
-## 💻 Entwicklung
+## 💻 Development
 
 ```bash
 npm run dev
 ```
 
-Die App läuft dann unter `http://localhost:5173`
+The app will run at `http://localhost:5173`
 
-**Wichtig:** 
-- **CV anzeigen:** `http://localhost:5173/` 
-- **CV bearbeiten:** `http://localhost:5173/edit`
+**Important:** 
+- **View Resume:** `http://localhost:5173/` 
+- **Edit Resume:** `http://localhost:5173/edit`
 
-### 📝 CV-Daten bearbeiten
+### 📝 Edit Resume Data
 
-Die App bietet einen integrierten **CV Data Editor** unter `/edit`:
+The app provides an integrated **Resume Data Editor** at `/edit`:
 
-1. Im Browser zu `http://localhost:5173/edit` navigieren
-2. Alle Abschnitte ausfüllen (Persönliche Infos, Erfahrung, Bildung, etc.)
-3. **"Save to LocalStorage"** - Daten im Browser speichern
-4. **"Export JSON"** - Daten als `cv-data.json` herunterladen
-5. JSON-Datei in den `public/` Ordner verschieben
-6. App neu laden - Daten werden automatisch geladen!
+1. Navigate to `http://localhost:5173/edit` in your browser
+2. Fill out all sections (Personal Info, Experience, Education, etc.)
+3. **"Save to LocalStorage"** – Save data in the browser
+4. **"Export JSON"** – Download data as `resume-data.json`
+5. Move the JSON file to the `public/` folder
+6. Reload the app – data will be loaded automatically!
 
 **Workflow:**
 ```
-/edit → Daten bearbeiten → Export JSON → Datei nach public/ → Fertig!
+/edit → Edit data → Export JSON → Move file to public/ → Done!
 ```
 
-Die exportierte `public/cv-data.json` wird beim App-Start automatisch geladen.
+The exported `public/resume-data.json` is automatically loaded at app start.
 
-**💡 Tipp:** Die `public/cv-data.json` kann in Git versioniert werden, um Änderungen am Lebenslauf nachzuverfolgen.
+**💡 Tip:** You can version `public/resume-data.json` with Git to track changes to your resume.
 
 ## 🏗️ Build
 
@@ -82,69 +82,69 @@ Die exportierte `public/cv-data.json` wird beim App-Start automatisch geladen.
 npm run build
 ```
 
-Erstellt eine optimierte Production-Build im `dist/` Ordner.
+Creates an optimized production build in the `dist/` folder.
 
-## 📄 Als PDF exportieren
+## 📄 Export as PDF
 
-1. App im Browser öffnen (`http://localhost:5173`)
-2. `Strg + P` (Windows) / `Cmd + P` (Mac) drücken
-3. Ziel: "Als PDF speichern" auswählen
-4. In den Einstellungen:
-   - **Hintergrundgrafiken**: Aktivieren (wichtig für Farben!)
-   - **Seitenränder**: Minimal oder Standard
-5. Speichern
+1. Open the app in your browser (`http://localhost:5173`)
+2. Press `Ctrl + P` (Windows) / `Cmd + P` (Mac)
+3. Select "Save as PDF" as the target
+4. In the settings:
+   - **Background graphics**: Enable (important for colors!)
+   - **Page margins**: Minimal or standard
+5. Save
 
-**Tipp:** Der blaue Header wird dank `print-color-adjust: exact` automatisch mit gedruckt.
+**Tip:** The blue header will be printed thanks to `print-color-adjust: exact`.
 
-## ✏️ Personalisierung
+## ✏️ Personalization
 
-### Daten anpassen
+### Adjust Data
 
-**Empfohlen:** Nutzen Sie den **CV Data Editor** unter `/edit` (siehe oben).
+**Recommended:** Use the **Resume Data Editor** at `/edit` (see above).
 
-**Alternativ:** Bearbeiten Sie `src/data/cv-data.ts` direkt mit Ihren persönlichen Informationen:
+**Alternatively:** Edit `src/data/resume-data.ts` directly with your personal information:
 
 ```typescript
-export const cvData: CVData = {
+export const resumeData: ResumeData = {
   personalInfo: {
-    name: 'Ihr Name',
-    location: 'Ihre Stadt',
+    name: 'Your Name',
+    location: 'Your City',
     phone: '+49 ...',
-    email: 'ihre@email.de',
+    email: 'your@email.com',
     github: 'https://github.com/username',
     linkedin: 'https://linkedin.com/in/username',
     profileImage: '/profile.jpg'  // Optional
   },
-  // ... weitere Daten
+  // ... more data
 }
 ```
 
-**Hinweis:** Wenn eine `public/cv-data.json` existiert, wird diese automatisch geladen und überschreibt `cv-data.ts`.
+**Note:** If a `public/resume-data.json` exists, it will be loaded automatically and override `resume-data.ts`.
 
-### Profilbild hinzufügen
+### Add Profile Image
 
-1. Quadratisches Foto vorbereiten (mindestens 300x300px)
-2. Als `profile.jpg` oder `profile.png` im `public/` Ordner speichern
-3. Pfad in `cv-data.ts` anpassen: `profileImage: '/profile.jpg'`
+1. Prepare a square photo (at least 300x300px)
+2. Save as `profile.jpg` or `profile.png` in the `public/` folder
+3. Adjust the path in `resume-data.ts`: `profileImage: '/profile.jpg'`
 
-Das Bild wird automatisch kreisförmig dargestellt (120px Durchmesser).
+The image will be displayed as a circle (120px diameter).
 
-### Farben anpassen
+### Change Colors
 
-Die Hauptfarbe (#0e5091) kann in allen Component-Dateien geändert werden:
+The main color (#0e5091) can be changed in all component files:
 - `src/components/Header.vue`
 - `src/components/Profile.vue`
 - `src/components/Experience.vue`
 - etc.
 
-## 📁 Projektstruktur
+## 📁 Project Structure
 
 ```
-cv/
+resume/
 ├── public/              
-│   └── cv-data.json     # Exportierte CV-Daten (automatisch geladen)
+│   └── resume-data.json     # Exported resume data (auto-loaded)
 ├── src/
-│   ├── components/      # Vue Komponenten
+│   ├── components/      # Vue components
 │   │   ├── Header.vue
 │   │   ├── Profile.vue
 │   │   ├── Experience.vue
@@ -152,21 +152,21 @@ cv/
 │   │   ├── Skills.vue
 │   │   ├── Projects.vue
 │   │   └── Interests.vue
-│   ├── views/           # Router Views
-│   │   ├── CVView.vue
-│   │   └── EditorView.vue  # CV Data Editor (Route: /edit)
+│   ├── views/           # Router views
+│   │   ├── ResumeView.vue
+│   │   └── EditorView.vue  # Resume Data Editor (route: /edit)
 │   ├── router/
-│   │   └── index.ts     # Vue Router Konfiguration
+│   │   └── index.ts     # Vue Router config
 │   ├── composables/
-│   │   └── useCVData.ts # CV Daten-Management & JSON Loading
+│   │   └── useResumeData.ts # Resume data management & JSON loading
 │   ├── data/
-│   │   └── cv-data.ts   # Fallback-Daten (wenn keine JSON vorhanden)
+│   │   └── resume-data.ts   # Fallback data (if no JSON present)
 │   ├── types/
-│   │   └── cv.types.ts  # TypeScript Interfaces
-│   ├── App.vue          # Haupt-Component mit Router
-│   ├── main.ts          # Entry Point + Font Awesome Setup
-│   └── vite-env.d.ts    # TypeScript Definitionen
-├── .prettierrc          # Prettier Konfiguration
+│   │   └── resume.types.ts  # TypeScript interfaces
+│   ├── App.vue          # Main component with router
+│   ├── main.ts          # Entry point + Font Awesome setup
+│   └── vite-env.d.ts    # TypeScript definitions
+├── .prettierrc          # Prettier config
 ├── .prettierignore
 ├── index.html
 ├── package.json
@@ -175,31 +175,31 @@ cv/
 └── README.md
 ```
 
-## 🛠️ Technologie-Stack
+## 🛠️ Technology Stack
 
-- **Vue 3** - Progressive JavaScript Framework
-- **TypeScript** - Typsicherheit
-- **Vite** - Build Tool & Dev Server
-- **Vue Router** - Client-side Routing
-- **Font Awesome** - Icon Library
+- **Vue 3** – Progressive JavaScript framework
+- **TypeScript** – Type safety
+- **Vite** – Build tool & dev server
+- **Vue Router** – Client-side routing
+- **Font Awesome** – Icon library
   - `@fortawesome/fontawesome-svg-core`
   - `@fortawesome/free-solid-svg-icons`
   - `@fortawesome/free-brands-svg-icons`
   - `@fortawesome/vue-fontawesome`
-- **Prettier** - Code Formatter
+- **Prettier** – Code formatter
 
-## 🎨 Design-Prinzipien
+## 🎨 Design Principles
 
-- Klare, professionelle Struktur
-- Responsive Design (Desktop & Mobile)
-- Print-First Approach für PDF-Export
-- Konsistente Icon-Nutzung
-- Typsichere Datenverwaltung
+- Clear, professional structure
+- Responsive design (desktop & mobile)
+- Print-first approach for PDF export
+- Consistent icon usage
+- Type-safe data management
 
-## 📝 Lizenz
+## 📝 License
 
-Frei verwendbar für private und kommerzielle Zwecke.
+Free for private and commercial use.
 
 ---
 
-**Erstellt mit ❤️ und Vue 3**
+**Made with ❤️ and Vue 3**
