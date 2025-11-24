@@ -1,22 +1,36 @@
 {
-  "personalInfo": {
+  "basics": {
     "name": "Max Mustermann",
-    "location": "Berlin",
-    "phone": "+49 170 1234567",
+    "label": "Softwareentwickler",
+    "image": "https://picsum.photos/200/300",
     "email": "max.mustermann@email.de",
-    "github": "https://github.com/maxmustermann",
-    "linkedin": "https://linkedin.com/in/maxmustermann",
-    "profileImage": "https://picsum.photos/200/300",
-    "website": "https://maxmustermann.dev"
+    "phone": "+49 170 1234567",
+    "url": "https://maxmustermann.dev",
+    "summary": "Engagierter Softwareentwickler mit 5+ Jahren Erfahrung in Web-, Cloud- und Backend-Entwicklung. Fokus auf sauberen Code, agile Prozesse und moderne Technologien wie Python, JavaScript, TypeScript, React, Node.js und Docker.",
+    "location": {
+      "city": "Berlin",
+      "countryCode": "DE"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "url": "https://github.com/maxmustermann"
+      },
+      {
+        "network": "LinkedIn",
+        "url": "https://linkedin.com/in/maxmustermann"
+      }
+    ]
   },
-  "profile": "Engagierter Softwareentwickler mit 5+ Jahren Erfahrung in Web-, Cloud- und Backend-Entwicklung. Fokus auf sauberen Code, agile Prozesse und moderne Technologien wie Python, JavaScript, TypeScript, React, Node.js und Docker.",
-  "experience": [
+  "work": [
     {
-      "title": "Softwareentwickler",
-      "company": "TechSolutions GmbH",
+      "name": "TechSolutions GmbH",
+      "position": "Softwareentwickler",
       "location": "Berlin",
-      "period": "03/2021 – heute",
-      "responsibilities": [
+      "startDate": "03/2021",
+      "endDate": "",
+      "summary": "Entwicklung von Microservices, Frontend und CI/CD.",
+      "highlights": [
         "Entwicklung von Microservices mit Node.js & Python (FastAPI)",
         "Frontend-Entwicklung mit React & TypeScript",
         "CI/CD mit GitHub Actions und Docker",
@@ -24,11 +38,13 @@
       ]
     },
     {
-      "title": "Junior Softwareentwickler",
-      "company": "WebSoft AG",
+      "name": "WebSoft AG",
+      "position": "Junior Softwareentwickler",
       "location": "Hamburg",
-      "period": "07/2018 – 02/2021",
-      "responsibilities": [
+      "startDate": "07/2018",
+      "endDate": "02/2021",
+      "summary": "Webentwicklung und Backend-Optimierung.",
+      "highlights": [
         "Webentwicklung mit JavaScript, HTML5, CSS3",
         "Backend-Entwicklung mit Python (Django)",
         "Optimierung von PostgreSQL-Abfragen",
@@ -38,35 +54,49 @@
   ],
   "education": [
     {
-      "degree": "Bachelor of Science – Informatik",
       "institution": "Technische Universität Berlin",
-      "period": "10/2014 – 09/2018"
+      "area": "Informatik",
+      "studyType": "Bachelor of Science",
+      "startDate": "10/2014",
+      "endDate": "09/2018"
     }
   ],
   "skills": [
-    "Python",
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Node.js",
-    "Django",
-    "Docker",
-    "AWS",
-    "Git",
-    "Linux"
+    {
+      "name": "Programmiersprachen",
+      "keywords": ["Python", "JavaScript", "TypeScript"]
+    },
+    {
+      "name": "Frameworks & Tools",
+      "keywords": ["React", "Node.js", "Django", "Docker", "AWS", "Git", "Linux"]
+    }
   ],
   "projects": [
     {
       "name": "SmartHome Dashboard",
       "description": "Open-Source-Webapp zur Visualisierung von IoT-Daten (React + FastAPI + MQTT, 500+ GitHub Stars)",
-      "icon": "💡"
+      "highlights": ["Open Source", "500+ GitHub Stars"],
+      "url": "https://github.com/maxmustermann/smarthome-dashboard"
     },
     {
       "name": "ChatBot für Kundensupport",
       "description": "KI-basierter Chatbot mit Python (Rasa), reduzierte manuelle Anfragen um 30 %",
-      "icon": "🚀"
+      "highlights": ["KI", "Automatisierung"],
+      "url": "https://github.com/maxmustermann/chatbot-support"
     }
   ],
-  "professionalDevelopment": [],
-  "interests": "Open-Source · KI & Machine Learning · Musikproduktion · Wandern"
+  "interests": [
+    {
+      "name": "Open-Source"
+    },
+    {
+      "name": "KI & Machine Learning"
+    },
+    {
+      "name": "Musikproduktion"
+    },
+    {
+      "name": "Wandern"
+    }
+  ]
 }

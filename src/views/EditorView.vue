@@ -1,539 +1,241 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useCVStore } from "../stores/cvStore";
-import type { CVData } from "../types/cv.types";
+import PersonalDataEditor from '../components/editor/PersonalDataEditor.vue';
+import WorkEditor from '../components/editor/WorkEditor.vue';
+import EducationEditor from '../components/editor/EducationEditor.vue';
+import SkillsEditor from '../components/editor/SkillsEditor.vue';
+import ProjectsEditor from '../components/editor/ProjectsEditor.vue';
+import InterestsEditor from '../components/editor/InterestsEditor.vue';
+import CertificatesEditor from '../components/editor/CertificatesEditor.vue';
+import AwardsEditor from '../components/editor/AwardsEditor.vue';
+import PublicationsEditor from '../components/editor/PublicationsEditor.vue';
+import LanguagesEditor from '../components/editor/LanguagesEditor.vue';
+import ReferencesEditor from '../components/editor/ReferencesEditor.vue';
+import { ref, onMounted } from 'vue';
+import type { Resume } from '../types/cv.types';
 
-const router = useRouter();
-const cvStore = useCVStore();
-const formData = ref<CVData>(null!);
+const fileInputRef = ref<HTMLInputElement | null>(null);
 
-onMounted(async () => {
-  await cvStore.loadCVData();
-  if (cvStore.cvData) {
-    formData.value = cvStore.cvData;
+function triggerFileInput() {
+  fileInputRef.value?.click();
+}
+
+function getDefaultResume(): Resume {
+  return {
+    basics: {
+      name: '',
+      label: '',
+      image: '',
+      email: '',
+      phone: '',
+      url: '',
+      summary: '',
+      location: { address: '', city: '', countryCode: '', postalCode: '', region: '' },
+      profiles: []
+    },
+    work: [],
+    volunteer: [],
+    education: [],
+    awards: [],
+    certificates: [],
+    publications: [],
+    skills: [],
+    languages: [],
+    interests: [],
+    references: [],
+    projects: []
+  };
+}
+
+const resume = ref<Resume>(getDefaultResume());
+
+function downloadResume() {
+  const dataStr = JSON.stringify(resume.value, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'cv-data.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function resetResume() {
+  if (confirm('Wirklich alle Daten zurücksetzen?')) {
+    resume.value = getDefaultResume();
+    localStorage.removeItem('cvData');
+  }
+}
+
+onMounted(() => {
+  const stored = localStorage.getItem('cvData');
+  if (stored) {
+    try {
+      resume.value = JSON.parse(stored);
+    } catch (e) {
+      resume.value = getDefaultResume();
+    }
   }
 });
 
-const downloadJSON = () => {
-  const dataStr = JSON.stringify(formData.value, null, 2);
-  const dataBlob = new Blob([dataStr], { type: "application/json" });
-  const url = URL.createObjectURL(dataBlob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "cv-data.json";
-  link.click();
-  URL.revokeObjectURL(url);
-  alert("JSON wurde heruntergeladen! Legen Sie die Datei im public/ Ordner ab.");
-};
+function saveToLocalStorage() {
+  localStorage.setItem('cvData', JSON.stringify(resume.value));
+  alert('Daten wurden gespeichert!');
+}
 
-const uploadJSON = (event: Event) => {
+function handleUpload(event: Event) {
   const input = event.target as HTMLInputElement;
   const file = input.files?.[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target?.result as string);
-        formData.value = data;
-        alert("Daten erfolgreich importiert!");
-      } catch (error) {
-        alert("Fehler beim Import: Ungültiges JSON Format");
-      }
-    };
-    reader.readAsText(file);
-  }
-};
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target?.result as string);
+      resume.value = data;
+      localStorage.setItem('cvData', JSON.stringify(data));
+      alert('Daten erfolgreich geladen und gespeichert!');
+    } catch (err) {
+      alert('Fehler beim Laden der Datei. Ungültiges JSON.');
+    }
+  };
+  reader.readAsText(file);
+}
 
-const saveToLocalStorage = () => {
-  localStorage.setItem("cvData", JSON.stringify(formData.value));
-  alert("Daten im Browser gespeichert!");
-};
+function addArrayItem(section: keyof Resume, item: any) {
+  (resume.value[section] as any[]).push(item);
+}
 
-const loadFromLocalStorage = () => {
-  const saved = localStorage.getItem("cvData");
-  if (saved) {
-    formData.value = JSON.parse(saved);
-    alert("Daten aus dem Browser geladen!");
-  } else {
-    alert("Keine gespeicherten Daten gefunden.");
-  }
-};
-
-const addExperience = () => {
-  formData.value.experience.push({
-    title: "",
-    company: "",
-    location: "",
-    period: "",
-    responsibilities: [""],
-  });
-};
-
-const removeExperience = (index: number) => {
-  formData.value.experience.splice(index, 1);
-};
-
-const addResponsibility = (expIndex: number) => {
-  formData.value.experience[expIndex].responsibilities.push("");
-};
-
-const removeResponsibility = (expIndex: number, respIndex: number) => {
-  formData.value.experience[expIndex].responsibilities.splice(respIndex, 1);
-};
-
-const addEducation = () => {
-  formData.value.education.push({
-    degree: "",
-    institution: "",
-    period: "",
-  });
-};
-
-const removeEducation = (index: number) => {
-  formData.value.education.splice(index, 1);
-};
-
-const addSkill = () => {
-  formData.value.skills.push("");
-};
-
-const removeSkill = (index: number) => {
-  formData.value.skills.splice(index, 1);
-};
-
-const addProject = () => {
-  formData.value.projects.push({
-    name: "",
-    description: "",
-    icon: "",
-  });
-};
-
-const removeProject = (index: number) => {
-  formData.value.projects.splice(index, 1);
-};
+function removeArrayItem(section: keyof Resume, idx: number) {
+  (resume.value[section] as any[]).splice(idx, 1);
+}
 </script>
-
 <template>
-  <div class="editor-view" v-if="formData">
-    <header class="editor-header">
-      <h1>CV Editor</h1>
-      <div class="header-actions">
-        <button @click="router.push('/')" class="btn btn-secondary">
-          <font-awesome-icon icon="arrow-left" /> Zurück zum CV
-        </button>
-        <button @click="saveToLocalStorage" class="btn btn-primary">
-          <font-awesome-icon icon="save" /> Speichern
-        </button>
-        <button @click="loadFromLocalStorage" class="btn btn-secondary">
-          <font-awesome-icon icon="upload" /> Laden
-        </button>
-        <button @click="downloadJSON" class="btn btn-success">
-          <font-awesome-icon icon="download" /> JSON Export
-        </button>
-        <label class="btn btn-info">
-          <font-awesome-icon icon="file-import" /> JSON Import
-          <input type="file" accept=".json" @change="uploadJSON" style="display: none" />
-        </label>
-      </div>
-    </header>
-
-    <div class="editor-container">
-      <!-- Personal Info -->
-      <section class="editor-section">
-        <h2><font-awesome-icon icon="user" /> Persönliche Informationen</h2>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Name</label>
-            <input v-model="formData.personalInfo.name" type="text" />
-          </div>
-          <div class="form-group">
-            <label>Ort</label>
-            <input v-model="formData.personalInfo.location" type="text" />
-          </div>
-          <div class="form-group">
-            <label>Telefon</label>
-            <input v-model="formData.personalInfo.phone" type="text" />
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input v-model="formData.personalInfo.email" type="email" />
-          </div>
-          <div class="form-group">
-            <label>GitHub URL</label>
-            <input v-model="formData.personalInfo.github" type="url" />
-          </div>
-          <div class="form-group">
-            <label>LinkedIn URL</label>
-            <input v-model="formData.personalInfo.linkedin" type="url" />
-          </div>
-          <div class="form-group full-width">
-            <label>Profilbild URL</label>
-            <input v-model="formData.personalInfo.profileImage" type="url" />
-          </div>
-        </div>
-      </section>
-
-      <!-- Profile -->
-      <section class="editor-section">
-        <h2><font-awesome-icon icon="lightbulb" /> Profil</h2>
-        <div class="form-group">
-          <textarea v-model="formData.profile" rows="4"></textarea>
-        </div>
-      </section>
-
-      <!-- Experience -->
-      <section class="editor-section">
-        <h2><font-awesome-icon icon="briefcase" /> Berufserfahrung</h2>
-        <div v-for="(exp, expIndex) in formData.experience" :key="expIndex" class="subsection">
-          <div class="subsection-header">
-            <h3>Position {{ expIndex + 1 }}</h3>
-            <button @click="removeExperience(expIndex)" class="btn btn-danger btn-sm">
-              <font-awesome-icon icon="trash" /> Entfernen
-            </button>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Position</label>
-              <input v-model="exp.title" type="text" />
-            </div>
-            <div class="form-group">
-              <label>Unternehmen</label>
-              <input v-model="exp.company" type="text" />
-            </div>
-            <div class="form-group">
-              <label>Ort</label>
-              <input v-model="exp.location" type="text" />
-            </div>
-            <div class="form-group">
-              <label>Zeitraum</label>
-              <input v-model="exp.period" type="text" placeholder="z.B. 03/2021 – heute" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Verantwortlichkeiten</label>
-            <div v-for="(_, respIndex) in exp.responsibilities" :key="respIndex" class="list-item">
-              <input v-model="exp.responsibilities[respIndex]" type="text" />
-              <button
-                @click="removeResponsibility(expIndex, respIndex)"
-                class="btn btn-danger btn-xs"
-              >
-                <font-awesome-icon icon="times" />
-              </button>
-            </div>
-            <button @click="addResponsibility(expIndex)" class="btn btn-secondary btn-sm">
-              <font-awesome-icon icon="plus" /> Verantwortlichkeit hinzufügen
-            </button>
-          </div>
-        </div>
-        <button @click="addExperience" class="btn btn-primary">
-          <font-awesome-icon icon="plus" /> Position hinzufügen
-        </button>
-      </section>
-
-      <!-- Education -->
-      <section class="editor-section">
-        <h2><font-awesome-icon icon="graduation-cap" /> Ausbildung</h2>
-        <div v-for="(edu, eduIndex) in formData.education" :key="eduIndex" class="subsection">
-          <div class="subsection-header">
-            <h3>Ausbildung {{ eduIndex + 1 }}</h3>
-            <button @click="removeEducation(eduIndex)" class="btn btn-danger btn-sm">
-              <font-awesome-icon icon="trash" /> Entfernen
-            </button>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Abschluss</label>
-              <input v-model="edu.degree" type="text" />
-            </div>
-            <div class="form-group">
-              <label>Institution</label>
-              <input v-model="edu.institution" type="text" />
-            </div>
-            <div class="form-group">
-              <label>Zeitraum</label>
-              <input v-model="edu.period" type="text" placeholder="z.B. 10/2014 – 09/2018" />
-            </div>
-          </div>
-        </div>
-        <button @click="addEducation" class="btn btn-primary">
-          <font-awesome-icon icon="plus" /> Ausbildung hinzufügen
-        </button>
-      </section>
-
-      <!-- Skills -->
-      <section class="editor-section">
-        <h2><font-awesome-icon icon="code" /> Kenntnisse</h2>
-        <div class="skills-list">
-          <div v-for="(_, skillIndex) in formData.skills" :key="skillIndex" class="list-item">
-            <input v-model="formData.skills[skillIndex]" type="text" />
-            <button @click="removeSkill(skillIndex)" class="btn btn-danger btn-xs">
-              <font-awesome-icon icon="times" />
-            </button>
-          </div>
-        </div>
-        <button @click="addSkill" class="btn btn-primary">
-          <font-awesome-icon icon="plus" /> Kenntnis hinzufügen
-        </button>
-      </section>
-
-      <!-- Projects -->
-      <section class="editor-section">
-        <h2><font-awesome-icon icon="lightbulb" /> Projekte</h2>
-        <div v-for="(project, projIndex) in formData.projects" :key="projIndex" class="subsection">
-          <div class="subsection-header">
-            <h3>Projekt {{ projIndex + 1 }}</h3>
-            <button @click="removeProject(projIndex)" class="btn btn-danger btn-sm">
-              <font-awesome-icon icon="trash" /> Entfernen
-            </button>
-          </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Name</label>
-              <input v-model="project.name" type="text" />
-            </div>
-            <div class="form-group">
-              <label>Icon (Emoji)</label>
-              <input v-model="project.icon" type="text" placeholder="z.B. 💡" />
-            </div>
-            <div class="form-group full-width">
-              <label>Beschreibung</label>
-              <textarea v-model="project.description" rows="2"></textarea>
-            </div>
-          </div>
-        </div>
-        <button @click="addProject" class="btn btn-primary">
-          <font-awesome-icon icon="plus" /> Projekt hinzufügen
-        </button>
-      </section>
-
-      <!-- Interests -->
-      <section class="editor-section">
-        <h2><font-awesome-icon icon="heart" /> Interessen</h2>
-        <div class="form-group">
-          <textarea v-model="formData.interests" rows="2"></textarea>
-        </div>
-      </section>
+  <div class="editor-view">
+    <div class="editor-toolbar">
+      <button class="editor-btn" @click="triggerFileInput">JSON Resume hochladen</button>
+      <input ref="fileInputRef" type="file" accept=".json" @change="handleUpload" style="display:none" />
+      <button class="editor-btn" @click="saveToLocalStorage">Speichern</button>
+      <button class="editor-btn" @click="downloadResume">Download</button>
+      <button class="editor-btn" @click="resetResume">Reset</button>
     </div>
+
+    <h1>CV Editor (JSON Resume Schema)</h1>
+    <PersonalDataEditor v-model="resume"
+      @addProfile="(resume.basics.profiles ?? (resume.basics.profiles = [])).push({ network: '', username: '', url: '' })"
+      @removeProfile="idx => (resume.basics.profiles ?? []).splice(idx, 1)" />
+    <WorkEditor v-model="resume"
+      @addWork="addArrayItem('work', { name: '', position: '', location: '', startDate: '', endDate: '', url: '', summary: '', highlights: [] })"
+      @removeWork="idx => removeArrayItem('work', idx)"
+      @addWorkHighlight="idx => resume.work[idx]?.highlights?.push('')"
+      @removeWorkHighlight="(idx, hidx) => resume.work[idx]?.highlights?.splice(hidx, 1)" />
+    <EducationEditor v-model="resume"
+      @addEducation="addArrayItem('education', { institution: '', area: '', studyType: '', score: '', startDate: '', endDate: '' })"
+      @removeEducation="idx => removeArrayItem('education', idx)" />
+    <SkillsEditor v-model="resume" @addSkill="addArrayItem('skills', { name: '', level: '', keywords: [] })"
+      @removeSkill="idx => removeArrayItem('skills', idx)"
+      @addSkillKeyword="idx => resume.skills[idx]?.keywords?.push('')"
+      @removeSkillKeyword="(idx, kidx) => resume.skills[idx]?.keywords?.splice(kidx, 1)" />
+    <ProjectsEditor v-model="resume"
+      @addProject="addArrayItem('projects', { name: '', url: '', startDate: '', endDate: '', description: '', highlights: [], keywords: [] })"
+      @removeProject="idx => removeArrayItem('projects', idx)"
+      @addProjectHighlight="idx => resume.projects[idx]?.highlights?.push('')"
+      @removeProjectHighlight="(idx, hidx) => resume.projects[idx]?.highlights?.splice(hidx, 1)"
+      @addProjectKeyword="idx => resume.projects[idx]?.keywords?.push('')"
+      @removeProjectKeyword="(idx, kidx) => resume.projects[idx]?.keywords?.splice(kidx, 1)" />
+    <InterestsEditor v-model="resume" @addInterest="addArrayItem('interests', { name: '', keywords: [] })"
+      @removeInterest="idx => removeArrayItem('interests', idx)"
+      @addInterestKeyword="idx => resume.interests[idx]?.keywords?.push('')"
+      @removeInterestKeyword="(idx, kidx) => resume.interests[idx]?.keywords?.splice(kidx, 1)" />
+    <CertificatesEditor v-model="resume"
+      @addCertificate="addArrayItem('certificates', { name: '', issuer: '', date: '', url: '' })"
+      @removeCertificate="idx => removeArrayItem('certificates', idx)" />
+    <AwardsEditor v-model="resume" @addAward="addArrayItem('awards', { title: '', awarder: '', date: '', summary: '' })"
+      @removeAward="idx => removeArrayItem('awards', idx)" />
+    <PublicationsEditor v-model="resume"
+      @addPublication="addArrayItem('publications', { name: '', publisher: '', releaseDate: '', url: '', summary: '' })"
+      @removePublication="idx => removeArrayItem('publications', idx)" />
+    <LanguagesEditor v-model="resume" @addLanguage="addArrayItem('languages', { language: '', fluency: '' })"
+      @removeLanguage="idx => removeArrayItem('languages', idx)" />
+    <ReferencesEditor v-model="resume" @addReference="addArrayItem('references', { name: '', reference: '' })"
+      @removeReference="idx => removeArrayItem('references', idx)" />
   </div>
 </template>
 
-<style scoped>
+<style>
 .editor-view {
-  min-height: 100vh;
-  background: #f5f5f5;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 16px;
 }
 
-.editor-header {
-  background: #136c96;
-  color: white;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+section {
+  margin-bottom: 32px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 24px 20px;
 }
 
-.editor-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
-}
-
-.header-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.editor-container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.editor-section {
-  background: white;
-  padding: 30px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.editor-section h2 {
+h2 {
+  margin-top: 0;
+  font-size: 1.3rem;
   color: #0e5091;
-  margin: 0 0 20px 0;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-  margin-bottom: 15px;
+.array-block {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group.full-width {
-  grid-column: 1 / -1;
-}
-
-.form-group label {
-  font-weight: 600;
-  margin-bottom: 5px;
-  color: #333;
-  font-size: 0.9rem;
-}
-
-.form-group input,
-.form-group textarea {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+input,
+textarea {
+  display: block;
+  margin-bottom: 8px;
+  width: 100%;
   font-size: 1rem;
-  font-family: inherit;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #0e5091;
-}
-
-.subsection {
-  background: #f9f9f9;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  border: 1px solid #e0e0e0;
-}
-
-.subsection-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.subsection-header h3 {
-  margin: 0;
-  font-size: 1.1rem;
-  color: #555;
-}
-
-.list-item {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.list-item input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ddd;
+  padding: 6px 8px;
   border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
-.skills-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-/* Buttons */
-.btn {
-  padding: 10px 20px;
+button {
+  margin: 4px 0 12px 0;
+  padding: 6px 14px;
+  background: #0e5091;
+  color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s;
 }
 
-.btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+button:hover {
+  background: #09325c;
 }
 
-.btn-primary {
+.editor-toolbar {
+  display: flex;
+  margin: 0 auto;
+  gap: 45px;
+}
+
+.editor-btn {
   background: #0e5091;
-  color: white;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  min-width: 170px;
+  text-align: center;
+  transition: background 0.2s;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-primary:hover {
-  background: #0c4279;
-}
-
-.btn-secondary {
-  background: #6c757d;
-  color: white;
-}
-
-.btn-secondary:hover {
-  background: #5a6268;
-}
-
-.btn-success {
-  background: #28a745;
-  color: white;
-}
-
-.btn-success:hover {
-  background: #218838;
-}
-
-.btn-info {
-  background: #17a2b8;
-  color: white;
-}
-
-.btn-info:hover {
-  background: #138496;
-}
-
-.btn-danger {
-  background: #dc3545;
-  color: white;
-}
-
-.btn-danger:hover {
-  background: #c82333;
-}
-
-.btn-sm {
-  padding: 6px 12px;
-  font-size: 0.85rem;
-}
-
-.btn-xs {
-  padding: 4px 8px;
-  font-size: 0.8rem;
-}
-
-@media (max-width: 768px) {
-  .editor-header {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .header-actions {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
+.editor-btn:hover {
+  background: #09325c;
 }
 </style>

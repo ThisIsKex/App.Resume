@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import CVView from "../views/CVView.vue";
+import ResumeView from "../views/ResumeView.vue";
 import EditorView from "../views/EditorView.vue";
 
 const router = createRouter({
@@ -7,8 +7,8 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "cv",
-      component: CVView,
+      name: "resume",
+      component: ResumeView,
     },
     {
       path: "/edit",

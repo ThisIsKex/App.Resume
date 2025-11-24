@@ -1,22 +1,21 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-import Header from "../components/Header.vue";
-import Profile from "../components/Profile.vue";
-import Experience from "../components/Experience.vue";
-import Education from "../components/Education.vue";
-import Skills from "../components/Skills.vue";
-import Projects from "../components/Projects.vue";
-import ProfessionalDevelopment from "../components/ProfessionalDevelopment.vue";
-import Interests from "../components/Interests.vue";
+import Header from "../components/resume/Header.vue";
+import Work from "../components/resume/Work.vue";
+import Education from "../components/resume/Education.vue";
+import Skills from "../components/resume/Skills.vue";
+import Projects from "../components/resume/Projects.vue";
+import Interests from "../components/resume/Interests.vue";
 import { useCVStore } from "../stores/cvStore";
+import Certificates from "../components/resume/Certificates.vue";
 
 const router = useRouter();
 const cvStore = useCVStore();
 const isPrinting = ref(false);
 
 onMounted(async () => {
-  await cvStore.loadCVData();
+  await cvStore.loadResumeData();
 });
 
 const handlePrint = () => {
@@ -29,7 +28,7 @@ const handlePrint = () => {
 </script>
 
 <template>
-  <div class="cv-app" v-if="cvStore.cvData">
+  <div class="cv-app" v-if="cvStore.resumeData">
     <div class="print-controls">
       <button @click="router.push('/edit');" class="edit-button">
         <font-awesome-icon icon="pen" /> Bearbeiten
@@ -39,18 +38,16 @@ const handlePrint = () => {
       </button>
 
     </div>
-    <Header :personalInfo="cvStore.cvData.personalInfo" />
-    <Profile v-if="cvStore.cvData.profile" :profile="cvStore.cvData.profile" />
-    <Experience :experiences="cvStore.experience" />
-    <Education :education="cvStore.education" />
-    <Skills :skills="cvStore.skills" />
-    <Projects v-if="cvStore.projects.length > 0" :projects="cvStore.projects" />
-    <ProfessionalDevelopment v-if="cvStore.cvData.professionalDevelopment.length > 0"
-      :professionalDevelopment="cvStore.cvData.professionalDevelopment" />
-    <Interests :interests="cvStore.cvData.interests" />
+    <Header :basics="cvStore.resumeData.basics" />
+    <Work :work="cvStore.resumeData.work" />
+    <Education :education="cvStore.resumeData.education" />
+    <Skills :skills="cvStore.resumeData.skills" />
+    <Projects v-if="cvStore.resumeData.projects.length > 0" :projects="cvStore.resumeData.projects" />
+    <Certificates :certificates="cvStore.resumeData.certificates" />
+    <Interests :interests="cvStore.resumeData.interests" />
 
     <footer class="cv-footer">
-      © 2025 {{ cvStore.cvData.personalInfo.name }} – Erstellt mit Vue 3 & TypeScript
+      © 2025 {{ cvStore.resumeData.basics.name }} – Erstellt mit Vue 3 & TypeScript
     </footer>
   </div>
 </template>
