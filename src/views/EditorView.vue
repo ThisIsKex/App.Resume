@@ -134,7 +134,6 @@ function removeArrayItem<K extends keyof typeof resume.value>(section: K, idx: n
         addArrayItem('work', {
           name: '',
           position: '',
-          location: '',
           startDate: '',
           endDate: '',
           url: '',
