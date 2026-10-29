@@ -4,9 +4,8 @@ export function useFormatting() {
   const formatLocation = (location?: Location): string => {
     if (!location) return "";
 
-    const parts = [location.address, location.city, location.region, location.countryCode].filter(
-      Boolean,
-    );
+    const city = [location.postalCode, location.city].filter(Boolean).join(" ");
+    const parts = [location.address, city, location.region, location.countryCode].filter(Boolean);
 
     return parts.join(", ");
   };

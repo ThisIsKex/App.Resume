@@ -9,6 +9,7 @@ import Projects from "../components/resume/Projects.vue";
 import Interests from "../components/resume/Interests.vue";
 import { useCVStore } from "../stores/cvStore";
 import Certificates from "../components/resume/Certificates.vue";
+import Languages from "../components/resume/Languages.vue";
 
 const router = useRouter();
 const cvStore = useCVStore();
@@ -34,6 +35,7 @@ const hasContent = () => {
     !isEmpty(data.work) ||
     !isEmpty(data.education) ||
     !isEmpty(data.skills) ||
+    !isEmpty(data.languages) ||
     !isEmpty(data.projects)
   );
 };
@@ -84,6 +86,10 @@ const hasContent = () => {
         :education="cvStore.resumeData.education"
       />
       <Skills v-if="!isEmpty(cvStore.resumeData.skills)" :skills="cvStore.resumeData.skills" />
+      <Languages
+        v-if="!isEmpty(cvStore.resumeData.languages)"
+        :languages="cvStore.resumeData.languages"
+      />
       <Projects
         v-if="!isEmpty(cvStore.resumeData.projects)"
         :projects="cvStore.resumeData.projects"
@@ -240,6 +246,17 @@ const hasContent = () => {
 }
 
 @media print {
+  :deep(.cv-section) {
+    margin-top: 0.25cm;
+    margin-bottom: 0.25cm;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  :deep(.cv-section h2) {
+    margin-bottom: 10px;
+  }
+
   @page {
     margin-top: 1cm;
     margin-bottom: 1cm;

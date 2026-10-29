@@ -1,8 +1,23 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useFormatting } from "../../composables/useFormatting";
 import type { Basics } from "../../types/resume.types";
-defineProps<{
+
+const props = defineProps<{
   basics: Basics;
 }>();
+const { formatLocation } = useFormatting();
+const formattedLocation = computed(() => formatLocation(props.basics.location));
+const socialIcons: Record<string, string> = {
+  github: "github",
+  linkedin: "linkedin",
+};
+const profiles = computed(() =>
+  props.basics.profiles?.map((profile) => ({
+    ...profile,
+    icon: profile.icon || socialIcons[profile.network.trim().toLowerCase()],
+  })),
+);
 </script>
 
 <template>
@@ -11,10 +26,9 @@ defineProps<{
       <img v-if="basics.image" :src="basics.image" :alt="basics.name" class="profile-image" />
       <div class="header-text">
         <h1>{{ basics.name }}</h1>
-        <p class="location" v-if="basics.location">
+        <p class="location" v-if="formattedLocation">
           <font-awesome-icon icon="map-marker-alt" />
-          {{ basics.location.address }}, {{ basics.location.city }}, {{ basics.location.region }},
-          {{ basics.location.countryCode }}
+          {{ formattedLocation }}
         </p>
         <p class="contact-info">
           <a v-if="basics.phone" :href="`tel:${basics.phone}`">
@@ -27,9 +41,9 @@ defineProps<{
             {{ basics.email }}
           </a>
         </p>
-        <p class="social-links" v-if="basics.profiles">
+        <p class="social-links" v-if="profiles?.length">
           <a
-            v-for="profile in basics.profiles"
+            v-for="profile in profiles"
             :key="profile.network"
             :href="profile.url"
             target="_blank"
