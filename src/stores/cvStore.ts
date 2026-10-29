@@ -2,8 +2,15 @@ import { defineStore } from "pinia";
 import { ref, watch } from "vue";
 import type { Resume } from "../types/resume.types";
 import { getDefaultResume } from "../utils/defaults";
-import { isValidResume } from "../utils/validation";
+import { isValidResume, validateJSON } from "../utils/validation";
 import { STORAGE_KEYS } from "../constants";
+
+function hasResumeContent(value: unknown): boolean {
+  if (typeof value === "string") return value.trim().length > 0;
+  if (Array.isArray(value)) return value.some(hasResumeContent);
+  if (value && typeof value === "object") return Object.values(value).some(hasResumeContent);
+  return false;
+}
 
 export const useCVStore = defineStore("cv", () => {
   // State
@@ -33,29 +40,44 @@ export const useCVStore = defineStore("cv", () => {
       // 1. Try loading from localStorage first
       const stored = localStorage.getItem(STORAGE_KEYS.CV_DATA);
       if (stored) {
-        const parsed = JSON.parse(stored);
-        if (isValidResume(parsed)) {
-          resumeData.value = parsed;
+        const validation = validateJSON(stored);
+        if (validation.valid && validation.data && hasResumeContent(validation.data)) {
+          resumeData.value = validation.data;
           console.log("✅ CV-Daten aus localStorage geladen");
           isLoading.value = false;
           return;
         }
       }
 
-      // 2. Try loading from cv-data.json
+      // 2. Try the user-provided file, then the bundled example
       const response = await fetch("/cv-data.json");
-      if (response.ok) {
-        const jsonData = await response.json();
-        if (isValidResume(jsonData)) {
-          resumeData.value = jsonData;
-          saveToLocalStorage();
-          console.log("✅ CV-Daten aus cv-data.json geladen");
-        } else {
-          throw new Error("Ungültiges Resume-Format");
+      let jsonText =
+        response.ok && response.headers.get("content-type")?.includes("application/json")
+          ? await response.text()
+          : "";
+
+      if (!jsonText) {
+        const exampleResponse = await fetch("/cv-data-example.json");
+        if (
+          exampleResponse.ok &&
+          exampleResponse.headers.get("content-type")?.includes("application/json")
+        ) {
+          jsonText = await exampleResponse.text();
         }
+      }
+
+      if (jsonText) {
+        const validation = validateJSON(jsonText);
+        if (!validation.valid || !validation.data) {
+          throw new Error(validation.error || "Ungültiges Resume-Format");
+        }
+
+        resumeData.value = validation.data;
+        saveToLocalStorage();
+        console.log("✅ CV-Daten aus öffentlicher JSON-Datei geladen");
       } else {
-        // 3. Use default data
-        console.log("ℹ️ Keine cv-data.json gefunden, nutze Standard-Daten");
+        // 3. Use default data when no public resume file is available
+        console.log("ℹ️ Keine Resume-JSON-Datei gefunden, nutze Standard-Daten");
         resumeData.value = getDefaultResume();
       }
     } catch (err) {

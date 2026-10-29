@@ -2,23 +2,28 @@
   "basics": {
     "name": "Max Mustermann",
     "label": "Softwareentwickler",
-    "image": "https://picsum.photos/200/300",
-    "email": "max.mustermann@email.de",
-    "phone": "+49 170 1234567",
-    "url": "https://maxmustermann.dev",
-    "summary": "Engagierter Softwareentwickler mit 5+ Jahren Erfahrung in Web-, Cloud- und Backend-Entwicklung. Fokus auf sauberen Code, agile Prozesse und moderne Technologien wie Python, JavaScript, TypeScript, React, Node.js und Docker.",
+    "image": "",
+    "email": "max.mustermann@example.com",
+    "phone": "+49 30 12345678",
+    "url": "https://max-mustermann.example.com",
+    "summary": "Softwareentwickler mit Schwerpunkt auf Webanwendungen und cloudbasierten Services. Ich verbinde strukturiertes Problemlösen mit pragmatischer Zusammenarbeit und entwickle gern Lösungen, die für Menschen im Alltag wirklich hilfreich sind.",
     "location": {
+      "address": "Beispielstraße 12",
+      "postalCode": "10115",
       "city": "Berlin",
+      "region": "Berlin",
       "countryCode": "DE"
     },
     "profiles": [
       {
         "network": "GitHub",
-        "url": "https://github.com/maxmustermann"
+        "username": "max-mustermann",
+        "url": "https://github.com/example"
       },
       {
         "network": "LinkedIn",
-        "url": "https://linkedin.com/in/maxmustermann"
+        "username": "max-mustermann",
+        "url": "https://www.linkedin.com/in/example"
       }
     ]
   },
@@ -26,30 +31,36 @@
     {
       "name": "TechSolutions GmbH",
       "position": "Softwareentwickler",
-      "location": "Berlin",
       "startDate": "03/2021",
-      "endDate": "",
+      "endDate": "Heute",
       "summary": "Entwicklung von Microservices, Frontend und CI/CD.",
       "highlights": [
-        "Entwicklung von Microservices mit Node.js & Python (FastAPI)",
-        "Frontend-Entwicklung mit React & TypeScript",
-        "CI/CD mit GitHub Actions und Docker",
-        "Arbeiten im agilen Scrum-Team"
+        "Entwicklung und Betrieb von REST-Schnittstellen für interne Fachanwendungen",
+        "Einführung automatisierter Tests und verbesserte Build-Pipelines",
+        "Abstimmung technischer Lösungen mit Produktmanagement und Design"
       ]
     },
     {
       "name": "WebSoft AG",
       "position": "Junior Softwareentwickler",
-      "location": "Hamburg",
       "startDate": "07/2018",
       "endDate": "02/2021",
       "summary": "Webentwicklung und Backend-Optimierung.",
       "highlights": [
-        "Webentwicklung mit JavaScript, HTML5, CSS3",
-        "Backend-Entwicklung mit Python (Django)",
-        "Optimierung von PostgreSQL-Abfragen",
-        "Testautomatisierung & Code Reviews"
+        "Umsetzung responsiver Benutzeroberflächen mit JavaScript und TypeScript",
+        "Wartung von Backend-Diensten und Datenbankabfragen",
+        "Zusammenarbeit in einem agilen Team mit Code Reviews"
       ]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Code für Alle e. V.",
+      "position": "Ehrenamtlicher Mentor",
+      "startDate": "04/2022",
+      "endDate": "Heute",
+      "summary": "Unterstützung von Berufseinsteigerinnen und Berufseinsteigern beim Einstieg in die Webentwicklung.",
+      "highlights": ["Monatliche Mentoring-Termine und Feedback zu Übungsprojekten"]
     }
   ],
   "education": [
@@ -58,45 +69,97 @@
       "area": "Informatik",
       "studyType": "Bachelor of Science",
       "startDate": "10/2014",
-      "endDate": "09/2018"
+      "endDate": "09/2018",
+      "courses": ["Softwaretechnik", "Datenbanken", "Verteilte Systeme"]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Team Award für Produktqualität",
+      "date": "11/2023",
+      "awarder": "TechSolutions GmbH",
+      "summary": "Auszeichnung für die nachhaltige Verbesserung der Testabdeckung und Release-Stabilität."
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Cloud-Grundlagen",
+      "issuer": "Beispiel Akademie",
+      "date": "06/2022",
+      "url": "https://example.com/certificates/cloud-basics"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Wartbare APIs im Team entwickeln",
+      "publisher": "Beispiel Tech Blog",
+      "releaseDate": "02/2024",
+      "url": "https://example.com/articles/maintainable-apis",
+      "summary": "Ein kurzer Praxisbeitrag zu verständlichen Schnittstellen und gemeinsamen API-Konventionen."
     }
   ],
   "skills": [
     {
       "name": "Programmiersprachen",
+      "level": "Fortgeschritten",
       "keywords": ["Python", "JavaScript", "TypeScript"]
     },
     {
       "name": "Frameworks & Tools",
-      "keywords": ["React", "Node.js", "Django", "Docker", "AWS", "Git", "Linux"]
+      "level": "Gute Kenntnisse",
+      "keywords": ["Vue.js", "Node.js", "Docker", "Git", "PostgreSQL"]
     }
   ],
-  "projects": [
+  "languages": [
     {
-      "name": "SmartHome Dashboard",
-      "description": "Open-Source-Webapp zur Visualisierung von IoT-Daten (React + FastAPI + MQTT, 500+ GitHub Stars)",
-      "highlights": ["Open Source", "500+ GitHub Stars"],
-      "url": "https://github.com/maxmustermann/smarthome-dashboard"
+      "language": "Deutsch",
+      "fluency": "Muttersprache"
     },
     {
-      "name": "ChatBot für Kundensupport",
-      "description": "KI-basierter Chatbot mit Python (Rasa), reduzierte manuelle Anfragen um 30 %",
-      "highlights": ["KI", "Automatisierung"],
-      "url": "https://github.com/maxmustermann/chatbot-support"
+      "language": "Englisch",
+      "fluency": "Fließend"
     }
   ],
   "interests": [
     {
-      "name": "Open-Source"
+      "name": "Open-Source",
+      "keywords": ["Community-Projekte", "Wissensaustausch"]
     },
     {
-      "name": "KI & Machine Learning"
+      "name": "Wandern",
+      "keywords": ["Mehrtagestouren"]
+    }
+  ],
+  "references": [
+    {
+      "name": "Referenzen",
+      "reference": "Kontaktdaten gern auf Anfrage."
+    }
+  ],
+  "projects": [
+    {
+      "name": "Team-Planer",
+      "description": "Kleine Webanwendung zur übersichtlichen Planung gemeinsamer Aufgaben und Termine.",
+      "highlights": ["Responsive Oberfläche", "Barrierearme Bedienung"],
+      "keywords": ["Vue.js", "TypeScript"],
+      "startDate": "01/2023",
+      "endDate": "08/2023",
+      "url": "https://example.com/projects/team-planner",
+      "roles": ["Konzeption", "Frontend-Entwicklung"],
+      "entity": "Privates Beispielprojekt",
+      "type": "application"
     },
     {
-      "name": "Musikproduktion"
-    },
-    {
-      "name": "Wandern"
+      "name": "ÖPNV-Datenvisualisierung",
+      "description": "Prototyp, der offene Fahrplandaten in einer kompakten, filterbaren Ansicht darstellt.",
+      "highlights": ["Datenimport automatisiert", "Ergebnisse im Browser visualisiert"],
+      "keywords": ["JavaScript", "Datenvisualisierung"],
+      "startDate": "05/2021",
+      "endDate": "09/2021",
+      "url": "https://example.com/projects/transit-visualizer",
+      "roles": ["Entwicklung"],
+      "entity": "Privates Beispielprojekt",
+      "type": "application"
     }
   ]
 }
