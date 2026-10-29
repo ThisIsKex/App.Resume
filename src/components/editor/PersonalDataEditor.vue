@@ -15,17 +15,19 @@
       <input v-model="resume.basics.location.postalCode" placeholder="PLZ" />
       <input v-model="resume.basics.location.countryCode" placeholder="Ländercode (DE)" />
     </div>
-    <div>
+    <div class="social-profiles">
       <h3>Profile/Social Links</h3>
       <template v-if="resume.basics.profiles">
-        <div v-for="(profile, idx) in resume.basics.profiles" :key="idx">
+        <div v-for="(profile, idx) in resume.basics.profiles" :key="idx" class="profile-item">
           <input v-model="profile.network" placeholder="Netzwerk (z.B. GitHub)" />
           <input v-model="profile.username" placeholder="Username" />
           <input v-model="profile.url" placeholder="URL" />
-          <button @click="$emit('removeProfile', idx)">Entfernen</button>
+          <button class="remove-profile" @click="$emit('removeProfile', idx)">
+            Profil entfernen
+          </button>
         </div>
       </template>
-      <button @click="$emit('addProfile')">Profil hinzufügen</button>
+      <button class="add-profile" @click="$emit('addProfile')">+ Profil hinzufügen</button>
     </div>
   </section>
 </template>
